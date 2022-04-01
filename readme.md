@@ -17,6 +17,9 @@ _Further exploration on this project was using Swagger and Versioning. Swagger i
 * _.NET_
 * _Entity_
 
+## Description
+_This application is purely an API. This project was made to showcase knowledge on creating your own API for Epicodus c#. Users in Postman are able to GET(read), POST(create), PUT(update) and DELETE(delete) from this api using the endpoints listed below. Cats/Dogs/Monkeys are seeded into the database upon a database update so users can test functionality on GET, PUT and DELETE without having to POST(create) a new cat/dog/monkey._
+
 ## API Endpoints 
 
 | Usage | METHOD | URL | Params |
