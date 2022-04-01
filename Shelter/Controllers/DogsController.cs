@@ -171,6 +171,17 @@ namespace Shelter.Controllers
       return await query.ToListAsync();
     }
 
+    [HttpGet("random")]
+    public async Task<ActionResult<Dog>> GetRandomDog()
+    {
+      var rand = new Random();
+      var count = await _db.Dogs.CountAsync();
+      var next = rand.Next(count);
+      var randD = await _db.Dogs.Skip(next).FirstOrDefaultAsync();
+
+      return randD;
+    }
+
     [HttpPost]
     public async Task<ActionResult<Dog>> Post(Dog dog)
     {
