@@ -91,13 +91,17 @@ _Expect responses for Cats/Dogs to look like this:_
 * _Run `dotnet restore` to restore the obj and bin folders._
 * _Run `dotnet build` to build the project._
 * _Run `dotnet run` to have the local host live and able to check the api in Postman._
-* _To check routes with swagger, open a new page in your browser and enter this as the url: `https://localhost:5001/swagger`_
+* _To check routes with swagger, make sure your server is running from the step above with `dotnet run` then open a new page in your browser and enter this as the url: `https://localhost:5001/swagger`_
 
 
 ## Known Bugs: 
  
- _None so far._
+ _No Known Bugs._
 
  ## License - [MIT](https://opensource.org/licenses/MIT)
 
- Copyright (c) _2022 Isaac Overstreet._
+ Copyright (c) _2022 Isaac Overstreet._ 
+ 
+ ##### Contact
+ * _Github: `https://github.com/mrunderoad`_
+ * _Email: `isaacoverstreet3@gmail.com`_
