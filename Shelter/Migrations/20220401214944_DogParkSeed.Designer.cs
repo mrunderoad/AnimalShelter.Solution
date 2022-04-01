@@ -8,8 +8,8 @@ using Shelter.Models;
 namespace Shelter.Migrations
 {
     [DbContext(typeof(ShelterContext))]
-    [Migration("20220401211102_Monkeys")]
-    partial class Monkeys
+    [Migration("20220401214944_DogParkSeed")]
+    partial class DogParkSeed
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -127,6 +127,9 @@ namespace Shelter.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("varchar(50) CHARACTER SET utf8mb4");
 
+                    b.Property<int>("DogParkId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Gender")
                         .IsRequired()
                         .HasMaxLength(10)
@@ -139,6 +142,8 @@ namespace Shelter.Migrations
 
                     b.HasKey("DogId");
 
+                    b.HasIndex("DogParkId");
+
                     b.ToTable("Dogs");
 
                     b.HasData(
@@ -147,6 +152,7 @@ namespace Shelter.Migrations
                             DogId = 1,
                             Age = 4,
                             Breed = "Hot Dog",
+                            DogParkId = 1,
                             Gender = "Male",
                             Name = "Pickles"
                         },
@@ -155,6 +161,7 @@ namespace Shelter.Migrations
                             DogId = 2,
                             Age = 5,
                             Breed = "Cold Dog",
+                            DogParkId = 1,
                             Gender = "Male",
                             Name = "Jeremy"
                         },
@@ -163,6 +170,7 @@ namespace Shelter.Migrations
                             DogId = 3,
                             Age = 10,
                             Breed = "Long Haired Pug",
+                            DogParkId = 2,
                             Gender = "Male",
                             Name = "Fred"
                         },
@@ -171,6 +179,7 @@ namespace Shelter.Migrations
                             DogId = 4,
                             Age = 16,
                             Breed = "Got it goin on",
+                            DogParkId = 1,
                             Gender = "Mom",
                             Name = "Stacy"
                         },
@@ -179,6 +188,7 @@ namespace Shelter.Migrations
                             DogId = 5,
                             Age = 4,
                             Breed = "Dog",
+                            DogParkId = 2,
                             Gender = "Dog",
                             Name = "Dog"
                         },
@@ -187,16 +197,37 @@ namespace Shelter.Migrations
                             DogId = 6,
                             Age = 4,
                             Breed = "Bread dog",
+                            DogParkId = 1,
                             Gender = "Bread",
                             Name = "Baguette"
+                        });
+                });
+
+            modelBuilder.Entity("Shelter.Models.DogPark", b =>
+                {
+                    b.Property<int>("DogParkId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20) CHARACTER SET utf8mb4");
+
+                    b.HasKey("DogParkId");
+
+                    b.ToTable("DogParks");
+
+                    b.HasData(
+                        new
+                        {
+                            DogParkId = 1,
+                            Name = "Play Land"
                         },
                         new
                         {
-                            DogId = 7,
-                            Age = 4,
-                            Breed = "Rad dog",
-                            Gender = "Rad",
-                            Name = "Rad"
+                            DogParkId = 2,
+                            Name = "Dog Land"
                         });
                 });
 
@@ -222,6 +253,52 @@ namespace Shelter.Migrations
                     b.HasKey("MonkeyId");
 
                     b.ToTable("Monkeys");
+
+                    b.HasData(
+                        new
+                        {
+                            MonkeyId = 1,
+                            Age = 30,
+                            Gender = "Female",
+                            Name = "Koko"
+                        },
+                        new
+                        {
+                            MonkeyId = 2,
+                            Age = 45,
+                            Gender = "Male",
+                            Name = "Bilbo Baggins"
+                        },
+                        new
+                        {
+                            MonkeyId = 3,
+                            Age = 33,
+                            Gender = "Male",
+                            Name = "Connor McMonkey"
+                        },
+                        new
+                        {
+                            MonkeyId = 4,
+                            Age = 22,
+                            Gender = "Female",
+                            Name = "Izzy Booboo"
+                        });
+                });
+
+            modelBuilder.Entity("Shelter.Models.Dog", b =>
+                {
+                    b.HasOne("Shelter.Models.DogPark", "DogPark")
+                        .WithMany("Dogs")
+                        .HasForeignKey("DogParkId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("DogPark");
+                });
+
+            modelBuilder.Entity("Shelter.Models.DogPark", b =>
+                {
+                    b.Navigation("Dogs");
                 });
 #pragma warning restore 612, 618
         }
