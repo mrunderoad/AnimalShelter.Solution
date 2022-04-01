@@ -23,18 +23,24 @@ _Further exploration on this project was using Swagger and Versioning. Swagger i
 | :---  | :---:  | :--- | ---: |
 | See all Cats | GET | `localhost:5000/api/cats` | _NA_ |
 | See all Dogs | GET | `localhost:5000/api/dogs` | _NA_ |
+| See all Monkeys | GET | `localhost:5000/api/monkeys` | _NA_ |
 | See a specific Cat | GET | `localhost:5000/api/cats/id` | _ID_ |
 | See a specific Dog | GET | `localhost:5000/api/dogs/id` | _ID_ |
+| See a specific Monkey | GET | `localhost:5000/api/monkeys/id` | _ID_ |
 | Create a Cat | POST | `localhost:5000/api/cats` | _name, breed, age, gender_ |
 | Create a Dog | POST | `localhost:5000/api/dogs` | _name, breed, age, gender_ |
-| Update a Cat | PUT | `localhost:5000/api/cats` | _name, breed, age, gender_ |
-| Update a Dog | PUT | `localhost:5000/api/dogs` | _name, breed, age, gender_ |
+| Create a Monkey| POST | `localhost:5000/api/monkeys` | _name, age, gender_ |
+| Update a Cat | PUT | `localhost:5000/api/cats/id` | _name, breed, age, gender, ID_ |
+| Update a Dog | PUT | `localhost:5000/api/dogs/id` | _name, breed, age, gender, ID_ |
+| Update a Monkey | PUT | `localhost:5000/api/monkeys/id` | _name, age, gender, ID_ |
 | Delete a Cat | DELETE | `localhost:5000/api/cats/id` | _ID_ |
 | Delete a Dog | DELETE | `localhost:5000/api/dogs/id` | _ID_ |
+| Delete a Monkey | DELETE | `localhost:5000/api/monkeys/id` | _ID_ |
 | Search for Cat by name/breed/minAge/gender | GET | `localhost:5000/api/cats?[name/breed/minAge/gender]=[name/breed/minAge/gender Here]` | _name, breed, minAge, gender_ |
 | Search for Dog by name/breed/age/gender | GET | `localhost:5000/api/dogs?[name/breed/minAge/gender]=[name/breed/minAge/gender Here]` | _name, breed, minAge, gender_ |
-| V2 Controller Route | GET | `localhost:5000/api/2.0/dogs` | Add `2.0` between api/2.0/[cats/dogs] to use version 2 |
-##### Notes for endpoints: For Searching, do NOT include the []'s around the parameters. You may also string them together with and & symbol: `localhost:5000/api/cats?name=[name]&breed=[breed]`. Also, minAge searches for any results with ages over your input. For Versioning, the example provided is only for a GET route, but versioning covers all the routes available.
+| Search for Monkey by name/age/gender | GET | `localhost:5000/api/monkeys?[name/minAge/gender]=[name/minAge/gender Here]` | _name, minAge, gender_ |
+| V2 Controller Route | GET | `localhost:5000/api/2.0/dogs` | Add `2.0` to the endpoint like: `api/2.0/[cats/dogs/monkeys]` to use version 2 |
+##### Notes for endpoints: For Searching, do NOT include the []'s around the parameters. You may also string them together with and & symbol. ex: `localhost:5000/api/cats?name=[name]&breed=[breed]`. Also, minAge searches for any results with ages over your input. For Versioning, the example provided is only for a GET route, but versioning covers all the routes available.
 
 ### Using postman for this project
 _To use Postman for this project, first:_
