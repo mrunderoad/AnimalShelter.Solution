@@ -8,7 +8,7 @@ using System;
 
 namespace Shelter.Controllers
 {
-  [Route("api/[controller]")]
+  [Route("api/monkeys")]
   [ApiController]
   public class MonkeysController : ControllerBase
   {
