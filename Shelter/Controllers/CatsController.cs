@@ -19,9 +19,31 @@ namespace Shelter.Controllers
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Cat>>> Get()
+    public async Task<ActionResult<IEnumerable<Cat>>> Get(string name, string breed, int minAge, string gender)
     {
-      return await _db.Cats.ToListAsync();
+      var query = _db.Cats.AsQueryable();
+
+      if (name != null)
+      {
+        query = query.Where(entry => entry.Name == name);
+      }
+
+      if (breed != null)
+      {
+        query = query.Where(entry => entry.Breed == breed);
+      }
+
+      if (minAge > 0)
+      {
+        query = query.Where(entry => entry.Age >= minAge);
+      }
+
+      if (gender != null)
+      {
+        query = query.Where(entry => entry.Gender == gender);
+      }
+
+      return await query.ToListAsync();
     }
 
     [HttpPost]
