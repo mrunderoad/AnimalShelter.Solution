@@ -4,8 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Shelter.Models;
 using System.Linq;
-using System;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Shelter.Controllers
 {
@@ -121,9 +119,8 @@ namespace Shelter.Controllers
     }
   }
 
-
   [ApiVersion("2.0")]
-  [Route("api/[controller]")]
+  [Route("api/{v:apiVersion}/cats")]
   [ApiController]
   public class CatsV2Controller : ControllerBase
   {

@@ -13,7 +13,8 @@ _Further exploration on this project was using Swagger and Versioning. Swagger i
 * _Postman_
 * _Swagger_
 * _SQL_
-* _
+* _Versioning(?)_
+* _.NET_
 
 ## API Endpoints 
 
