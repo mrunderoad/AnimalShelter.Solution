@@ -10,19 +10,19 @@ namespace Shelter.Controllers
 {
   [Route("api/[controller]")]
   [ApiController]
-  public class CatsController : ControllerBase
+  public class DogsController : ControllerBase
   {
     private readonly ShelterContext _db;
 
-    public CatsController(ShelterContext db)
+    public DogsController(ShelterContext db)
     {
       _db = db;
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Cat>>> Get(string name, string breed, int minAge, string gender)
+    public async Task<ActionResult<IEnumerable<Dog>>> Get(string name, string breed, int minAge, string gender)
     {
-      var query = _db.Cats.AsQueryable();
+      var query = _db.Dogs.AsQueryable();
 
       if (name != null)
       {
@@ -48,36 +48,36 @@ namespace Shelter.Controllers
     }
 
     [HttpPost]
-    public async Task<ActionResult<Cat>> Post(Cat cat)
+    public async Task<ActionResult<Dog>> Post(Dog dog)
     {
-      _db.Cats.Add(cat);
+      _db.Dogs.Add(dog);
       await _db.SaveChangesAsync();
 
-      return CreatedAtAction("Post", new { id = cat.CatId }, cat);
+      return CreatedAtAction("Post", new { id = dog.DogId }, dog);
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<Cat>> GetCat(int id)
+    public async Task<ActionResult<Dog>> GetDog(int id)
     {
-      var cat = await _db.Cats.FindAsync(id);
+      var dog = await _db.Dogs.FindAsync(id);
 
-      if (cat == null)
+      if (dog == null)
       {
         return NotFound();
       }
 
-      return cat;
+      return dog;
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> Put(int id, Cat cat)
+    public async Task<IActionResult> Put(int id, Dog dog)
     {
-      if (id != cat.CatId)
+      if (id != dog.DogId)
       {
         return BadRequest();
       }
 
-      _db.Entry(cat).State = EntityState.Modified;
+      _db.Entry(dog).State = EntityState.Modified;
 
       try
       {
@@ -85,7 +85,7 @@ namespace Shelter.Controllers
       }
       catch (DbUpdateConcurrencyException)
       {
-        if (!CatExists(id))
+        if (!DogExists(id))
         {
           return NotFound();
         }
@@ -98,33 +98,25 @@ namespace Shelter.Controllers
       return NoContent();
     }
 
-    private bool CatExists(int id)
+    private bool DogExists(int id)
     {
-      return _db.Cats.Any(e => e.CatId == id);
+      return _db.Dogs.Any(e => e.DogId == id);
     }
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteCat(int id)
+    public async Task<IActionResult> DeleteDog(int id)
     {
-      var cat = await _db.Cats.FindAsync(id);
+      var dog = await _db.Dogs.FindAsync(id);
       
-      if (cat == null)
+      if (dog == null)
       {
         return NotFound();
       }
 
-      _db.Cats.Remove(cat);
+      _db.Dogs.Remove(dog);
       await _db.SaveChangesAsync();
 
       return NoContent();
     }
-
-    // [HttpGet("random")]
-    // public async Task<IActionResult> RandomCat()
-    // {
-    //   var cat = await _db.Cats.Random();
-      
-    //   return await _db.Cats.ToListAsync();
-    // }
   }
 }
