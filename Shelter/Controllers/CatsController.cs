@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Shelter.Models;
 using System.Linq;
+using System;
 
 namespace Shelter.Controllers
 {
@@ -44,6 +45,17 @@ namespace Shelter.Controllers
       }
 
       return await query.ToListAsync();
+    }
+
+    [HttpGet("random")]
+    public async Task<ActionResult<Cat>> GetRandomCat()
+    {
+      var rand = new Random();
+      var count = await _db.Cats.CountAsync();
+      var next = rand.Next(count);
+      var randC = await _db.Cats.Skip(next).FirstOrDefaultAsync();
+
+      return randC;
     }
 
     [HttpPost]
