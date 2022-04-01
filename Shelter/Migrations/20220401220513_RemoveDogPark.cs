@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Shelter.Migrations
 {
-    public partial class DogPark : Migration
+    public partial class RemoveDogPark : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -24,16 +24,19 @@ namespace Shelter.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "DogPark",
+                name: "Dogs",
                 columns: table => new
                 {
-                    DogParkId = table.Column<int>(type: "int", nullable: false)
+                    DogId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(type: "varchar(20) CHARACTER SET utf8mb4", maxLength: 20, nullable: false)
+                    Name = table.Column<string>(type: "varchar(20) CHARACTER SET utf8mb4", maxLength: 20, nullable: false),
+                    Breed = table.Column<string>(type: "varchar(50) CHARACTER SET utf8mb4", maxLength: 50, nullable: false),
+                    Age = table.Column<int>(type: "int", nullable: false),
+                    Gender = table.Column<string>(type: "varchar(10) CHARACTER SET utf8mb4", maxLength: 10, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DogPark", x => x.DogParkId);
+                    table.PrimaryKey("PK_Dogs", x => x.DogId);
                 });
 
             migrationBuilder.CreateTable(
@@ -49,29 +52,6 @@ namespace Shelter.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Monkeys", x => x.MonkeyId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Dogs",
-                columns: table => new
-                {
-                    DogId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(type: "varchar(20) CHARACTER SET utf8mb4", maxLength: 20, nullable: false),
-                    Breed = table.Column<string>(type: "varchar(50) CHARACTER SET utf8mb4", maxLength: 50, nullable: false),
-                    Age = table.Column<int>(type: "int", nullable: false),
-                    Gender = table.Column<string>(type: "varchar(10) CHARACTER SET utf8mb4", maxLength: 10, nullable: false),
-                    DogParkId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Dogs", x => x.DogId);
-                    table.ForeignKey(
-                        name: "FK_Dogs_DogPark_DogParkId",
-                        column: x => x.DogParkId,
-                        principalTable: "DogPark",
-                        principalColumn: "DogParkId",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
@@ -91,15 +71,15 @@ namespace Shelter.Migrations
 
             migrationBuilder.InsertData(
                 table: "Dogs",
-                columns: new[] { "DogId", "Age", "Breed", "DogParkId", "Gender", "Name" },
+                columns: new[] { "DogId", "Age", "Breed", "Gender", "Name" },
                 values: new object[,]
                 {
-                    { 6, 4, "Bread dog", 0, "Bread", "Baguette" },
-                    { 5, 4, "Dog", 0, "Dog", "Dog" },
-                    { 4, 16, "Got it goin on", 0, "Mom", "Stacy" },
-                    { 1, 4, "Hot Dog", 0, "Male", "Pickles" },
-                    { 2, 5, "Cold Dog", 0, "Male", "Jeremy" },
-                    { 3, 10, "Long Haired Pug", 0, "Male", "Fred" }
+                    { 6, 4, "Bread dog", "Bread", "Baguette" },
+                    { 5, 4, "Dog", "Dog", "Dog" },
+                    { 4, 16, "Got it goin on", "Mom", "Stacy" },
+                    { 1, 4, "Hot Dog", "Male", "Pickles" },
+                    { 2, 5, "Cold Dog", "Male", "Jeremy" },
+                    { 3, 10, "Long Haired Pug", "Male", "Fred" }
                 });
 
             migrationBuilder.InsertData(
@@ -112,11 +92,6 @@ namespace Shelter.Migrations
                     { 2, 45, "Male", "Bilbo Baggins" },
                     { 4, 22, "Female", "Izzy Booboo" }
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Dogs_DogParkId",
-                table: "Dogs",
-                column: "DogParkId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -129,9 +104,6 @@ namespace Shelter.Migrations
 
             migrationBuilder.DropTable(
                 name: "Monkeys");
-
-            migrationBuilder.DropTable(
-                name: "DogPark");
         }
     }
 }

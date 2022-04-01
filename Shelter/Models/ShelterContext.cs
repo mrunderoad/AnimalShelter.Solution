@@ -11,7 +11,6 @@ namespace Shelter.Models
     public DbSet<Cat> Cats { get; set; }
     public DbSet<Dog> Dogs { get; set; }
     public DbSet<Monkey> Monkeys { get; set; }
-    public DbSet<DogPark> DogParks { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -27,16 +26,6 @@ namespace Shelter.Models
           new Cat { CatId = 8, Name = "Phil", Breed = "KittyCat", Age = 1, Gender = "Male" }
         );
 
-      builder.Entity<Dog>()
-        .HasData(
-          new Dog { DogId = 1, Name = "Pickles", Breed = "Hot Dog", Age = 4, Gender = "Male", DogParkId = 1 },
-          new Dog { DogId = 2, Name = "Jeremy", Breed = "Cold Dog", Age = 5, Gender = "Male", DogParkId = 1 },
-          new Dog { DogId = 3, Name = "Fred", Breed = "Long Haired Pug", Age = 10, Gender = "Male", DogParkId = 2 },
-          new Dog { DogId = 4, Name = "Stacy", Breed = "Got it goin on", Age = 16, Gender = "Mom", DogParkId = 1 },
-          new Dog { DogId = 5, Name = "Dog", Breed = "Dog", Age = 4, Gender = "Dog", DogParkId = 2 },
-          new Dog { DogId = 6, Name = "Baguette", Breed = "Bread dog", Age = 4, Gender = "Bread", DogParkId = 1 }
-        );
-
       builder.Entity<Monkey>()
         .HasData(
           new Monkey { MonkeyId = 1, Name = "Koko", Age = 30, Gender = "Female" },
@@ -45,11 +34,16 @@ namespace Shelter.Models
           new Monkey { MonkeyId = 4, Name = "Izzy Booboo", Age = 22, Gender = "Female"}
         );
 
-      builder.Entity<DogPark>()
+      builder.Entity<Dog>()
         .HasData(
-          new DogPark { DogParkId = 1, Name = "Play Land" },
-          new DogPark { DogParkId = 2, Name = "Dog Land" }
+          new Dog { DogId = 1, Name = "Pickles", Breed = "Hot Dog", Age = 4, Gender = "Male" },
+          new Dog { DogId = 2, Name = "Jeremy", Breed = "Cold Dog", Age = 5, Gender = "Male" },
+          new Dog { DogId = 3, Name = "Fred", Breed = "Long Haired Pug", Age = 10, Gender = "Male" },
+          new Dog { DogId = 4, Name = "Stacy", Breed = "Got it goin on", Age = 16, Gender = "Mom" },
+          new Dog { DogId = 5, Name = "Dog", Breed = "Dog", Age = 4, Gender = "Dog" },
+          new Dog { DogId = 6, Name = "Baguette", Breed = "Bread dog", Age = 4, Gender = "Bread" }
         );
+
     }
   }
 }

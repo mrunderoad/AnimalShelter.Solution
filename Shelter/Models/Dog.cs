@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace Shelter.Models
 {
@@ -17,7 +18,5 @@ namespace Shelter.Models
     [Required]
     [StringLength(10)]
     public string Gender { get; set; }
-    public int DogParkId { get; set; }
-    public virtual DogPark DogPark { get; set; }
   }
 }
